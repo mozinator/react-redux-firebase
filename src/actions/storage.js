@@ -27,7 +27,7 @@ export const uploadFileWithProgress = (dispatch, firebase, { path, file }) => {
     type: FILE_UPLOAD_START,
     payload: { path, file }
   })
-  const uploadEvent = firebase.storage().ref(`${path}/${file.name}`).put(file)
+  const uploadEvent = firebase.storage().ref(`${path}/${file.name}`).putString(file, 'BASE64')
   // TODO: Allow config to control whether progress it set to state or not
   const unListen = uploadEvent.on(
     firebase.storage.TaskEvent.STATE_CHANGED,
